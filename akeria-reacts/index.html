@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134818019-7"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-134818019-7');
+	</script>
+	<link type="text/css" rel="stylesheet" href="video-js.min.css" />
+	<script src="video.min.js"></script> 
+	<script src="Youtube.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel|Major+Mono+Display" rel="stylesheet">
+
+	<title>Akeria reacts!</title>
+
+	<meta name="description" content="Akeria reacts! Made by the Coding Queen: Anna Lytical" />
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" value="summary">
+	<!-- Open Graph data -->
+	<meta property="og:title" content="Akeria reacts!" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://anna-lytical.firebaseapp.com/akeria-reacts/" />
+	<meta property="og:image" content="https://anna-lytical.firebaseapp.com/akeria-reacts/main-poster.png" />
+	<meta property="og:image:alt" content="Akeria reacting to the untucked video." />
+	<meta property="og:description" content="Akeria reacts! Made by the Coding Queen: Anna Lytical" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="akeria-fav.jpg"/>	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="intro-overlay" class="overlay" onclick="start()">
+		    <span>
+		<h1>AKERIA 😂💜😭💜😂</h1>	
+		<h3>click anywhere to play 🔊</h3>
+		<h2>Created by the coding queen:<span class="name"> <a target="_blank" href="https://youtu.be/TwbQ2gz97fs" onclick="handleOutboundLink(false)">Anna Lytical</a></span></h3>
+			    </span>
+	</div>
+
+	<div id="outro-overlay" class="overlay" onclick="reset()">
+		    <span>
+		<h1>Thanks for playing!</h1>	
+		<h2>Learn to code with me,<span class="name"> <a target="_blank" href="https://youtu.be/TwbQ2gz97fs" onclick="handleOutboundLink(true)">Anna Lytical<img src="thumb.png" alt="Youtube thumbnail for Anna Lytical's latest video.">
+</a></span></h3>
+    <h3>click anywhere to play again! 🔊</h3>
+    </span>
+	</div>
+
+
+	<div id="video-container">
+	<!-- 	<video id="akeria-video" class="main-video" onclick="pauseAkeria()"
+		poster="main-poster.png">
+			<source src="akeria-reacts-small.mp4" type="video/mp4"/>
+			Your browser does not support HTML5 video.
+		</video>-->
+		<video
+		class="video-js vjs-default-skin main-video"
+		id="akeria-video"
+		width="300"
+		poster="main-poster.png"
+		playsinline
+		>
+		<source src="akeria-reacts-small.mp4" type="video/mp4"/>
+
+	</video>
+
+
+	<video
+	class="video-js vjs-default-skin pip"
+	id="second-video"
+	width="300"
+	poster="untucked-poster.png"
+	playsinline
+	>
+</video>
+</div>
+<script>
+	$(window).on('resize', function() {
+		if (window.innerWidth > window.innerHeight*1.8) {
+			$("body").addClass("wide");
+		} else {
+			$("body").removeClass("wide");
+		}
+	});
+	$(window).trigger('resize');
+
+	var AKERIA_BREAKPOINTS = [2.18,6.21,10.10,12.05];
+	var AKERIA_BREAKPOINTS = [2.18,10.10,12.05];
+	var akeriaTimeIndex = 0;
+
+	var akeriaVideo = videojs("akeria-video");
+	akeriaVideo.ready(function () {
+
+		this.on('timeupdate', function () {
+			if (this.currentTime() > .03) {
+				removePip();
+			}
+
+			if (!this.paused() && this.currentTime() > AKERIA_BREAKPOINTS[akeriaTimeIndex]) {
+				this.pause();
+				akeriaTimeIndex++;
+				swapVideo();
+				console.log("updating akeria index");
+			}
+
+			if (this.ended()) {
+				$("#outro-overlay").show();
+			}
+		});
+	});
+
+	var videos = [
+	{
+		name: "unhhh",
+		url: "videos/unhhh.mp4",
+		breaks: [5,10.8,14,20]
+	},
+	{
+		name: "ally",
+		url: "videos/ally.mp4",
+		breaks: [1.5,10,12,16]
+	},
+	{
+		name: "june",
+		url: "videos/june.mp4",
+		breaks: [3.09,6.5,13.2,25]
+	},
+
+	{
+		name: "actress",
+		url: "videos/actress.mp4",
+		breaks: [3.3,7.5,25.5,36]
+	}
+	];
+	var videoIndex = 0;
+	var secondTimeIndex = 0;
+	var secondVideo = videojs('second-video');
+	secondVideo.ready(function () {
+		this.src(videos[videoIndex].url);
+
+		this.on('timeupdate', function () {
+			var nextTime = videos[videoIndex].breaks[secondTimeIndex];
+			if (!this.paused() && this.currentTime() > nextTime || this.ended()) {
+				this.pause();
+				secondTimeIndex++;
+				console.log("updating second index");
+				swapVideo();
+			}
+			if (this.ended()) {
+				played = true;
+			}
+		})
+	});
+
+	var started = false;
+	var played = false;
+	var viewCount = 0;
+	function start() {
+		if (!started && !inLink) {
+      gtag('event', "startVideo", {
+          'event_label': `watched ${viewCount} times`
+      });
+      gtag('event', "startVideo", {
+          'event_label': `watching video ${videos[videoIndex].name}`
+      });
+      viewCount++;
+			$("#intro-overlay").hide();
+			akeriaVideo.play();
+			akeriaVideo.pause();
+			secondVideo.play();
+			started = true;
+		}
+	}
+
+	function pauseAkeria() {
+		if (secondTimeIndex > 0) {
+			if (akeriaVideo.paused) {
+				akeriaVideo.play();		
+			} else {
+				akeriaVideo.pause();	
+
+			}
+		}
+	}
+
+	function removePip() {
+		var vid = $("#second-video.pip");
+		vid.removeClass("pip");
+		vid.addClass("main-video");
+		vid.hide();
+	}
+
+	function swapVideo() {
+		if (secondTimeIndex > akeriaTimeIndex) {
+			$("#akeria-video").show();
+			$("#second-video:not(.pip)").hide();
+			akeriaVideo.play();
+		} else {
+			$("#akeria-video").hide();
+			$("#second-video").show();
+			secondVideo.play();
+		}
+	}
+
+	function reset() {
+		$("#outro-overlay").hide();
+		started = false;
+		$("#second-video").removeClass("main-video").addClass("pip").show();
+		akeriaVideo.currentTime(0);
+		akeriaTimeIndex = 0;
+		secondVideo.currentTime(0);
+		secondTimeIndex = 0;
+		videoIndex++;
+		videoIndex = videoIndex % videos.length;
+		secondVideo.src(videos[videoIndex].url);
+		start();
+	}
+
+	var inLink = false;
+	function handleOutboundLink(fromOutro) {
+		inLink = true;
+		setTimeout(() => {
+		inLink = false;
+		started = false;
+		if (played) {
+			$("#outro-overlay").show();
+		} else {
+			$("#intro-overlay").show();
+		}
+	},5);
+		
+    var label = fromOutro ? "from outro" : "from in game";
+    gtag('event', "click", {
+        'event_category': 'Outbound Link',
+        'event_label': 'Youtube Channel Link '+label
+    });
+	}
+</script>
+</body>
+</html>

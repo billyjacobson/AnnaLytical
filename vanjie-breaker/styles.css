@@ -1,0 +1,89 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    background: url("images/background.jpeg");
+    background-size: 75px;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Gloria Hallelujah', cursive;
+    overflow: hidden;
+    position: fixed;
+}
+
+a {
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,.85);
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay span {
+    max-width: 400px;
+    margin-bottom: 100px;
+}
+
+h1, h3 {
+    margin-bottom:0; 
+}
+
+h5 {
+    margin: 0;
+}
+
+img {
+    width: 80%;
+    margin: auto 10px;
+}
+
+#outro-overlay {
+    display: none;
+}
+
+#phaser-example {
+    height: 100%;
+    margin: auto;
+    position: relative;
+}
+#phaser-example h3{
+    position: absolute;
+    top: 35px;
+    left: 5px;
+    margin: 0; 
+    font-family: 'Major Mono Display', monospace;
+}
+
+
+#phaser-example canvas {
+    height: 100% !important;
+    max-width: 100vw;
+    box-shadow: black 0 0 5px;
+    display: flex;
+    background: rgb(163,0,255);
+    background: linear-gradient(180deg, rgba(163,0,255,1) 0%, rgba(96,0,255,1) 50%, rgba(255,0,67,1) 99%);
+}
+
+@media (max-width: 400px) {
+    #phaser-example {
+        height: auto;
+    }
+    #phaser-example canvas {
+        width: 100% !important;
+        max-height: 100vh;
+    }
+}

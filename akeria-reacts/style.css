@@ -1,0 +1,77 @@
+body {
+	margin: 0;
+    color: white;
+    background: black;
+    font-family: 'Cinzel', serif;
+}
+
+#video-container {
+	position: relative;
+	height: 100vh;
+	max-width: 180vh;
+	margin: auto;
+}
+
+.main-video{
+	width: 100%;
+	position: absolute;
+}
+
+.pip {
+	position: absolute;
+    right: 9.5%;
+    top: 7.6vw;
+    width: 12.5%;
+    height: 7.15vw;
+    transform: skew(-6.5deg) perspective(100px) rotateY(-5deg);
+    z-index: 99;
+}
+
+.wide .pip {
+    top: 13vh;
+    height: 13vh;
+}
+
+.main-video.video-js {
+	max-height: 56.25vw;
+	height: 100%
+}
+
+.overlay span {
+}
+
+.overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,.85);
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay img {
+	display: block;
+    width: 80%;
+    max-width: 400px;
+    margin: 10px auto;
+}
+
+
+#intro-overlay h1 {
+	letter-spacing: 10px;
+}
+
+#outro-overlay {
+	display: none;
+}
+
+
+.name {
+	    font-family: 'Major Mono Display', monospace;
+}
+.name a {
+	color: white;
+}

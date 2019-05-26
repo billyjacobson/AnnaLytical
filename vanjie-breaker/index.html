@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134818019-7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-134818019-7');
+    </script>
+
+	<title>Get those cookies!!!</title>
+    <meta name="description" content="A gay twist on a classic game. Made by the Coding Queen: Anna Lytical" />
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Get those cookies!!!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://anna-lytical.firebaseapp.com/vanjie-breaker" />
+    <meta property="og:image" content="https://anna-lytical.firebaseapp.com/vanjie-breaker/images/og-img.png" />
+    <meta property="og:description" content="A gay twist on a classic game. Made by the Coding Queen: Anna Lytical" />
+    <link rel="shortcut icon" href="images/vanjie.png"/> 
+
+    <script src="phaser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Major+Mono+Display" rel="stylesheet">
+</head>
+<body >
+
+<div id="intro-overlay" class="overlay" onclick="hideOverlays()">
+    <span>
+    <h1>Get those cookies!</h1>
+    <h5>(click to play 🔊)</h5>
+    </span>
+</div>
+
+<div id="outro-overlay" class="overlay" onclick="hideOverlays()">
+    <span>
+    <h1>Thanks for playing!</h1>
+    <a onclick="handleOutboundLink(true)" target="_blank" href="https://youtu.be/TwbQ2gz97fs">
+        <h2>Check out my channel and  <br> learn to code 💜💜💜</h2>
+    <img src="images/thumb.jpg" alt="Video thumbnail for Anna Lytical's coding tutorial."></a>
+    <h3>Tutorial for this game is out now!!</h3>
+    <h5>(click elsewhere to play again)</h5>
+    </span>
+</div>
+
+<div id="phaser-example">
+    <a onclick="handleOutboundLink(false)" target="_blank" href="https://www.youtube.com/channel/UCK-XsdHry-tJ2IsNOHTGdcA/"><h3>@theAnnaLytical</h3></a>
+</div>
+
+<script type="text/javascript" src="breakout.js"></script>
+</body>
+</html>
